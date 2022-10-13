@@ -9,6 +9,8 @@ require "user/nvim-tree"
 require "user/toggleterm"
 require "user/telescope"
 require "user/gitsigns"
+require "user/which-key"
+
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
