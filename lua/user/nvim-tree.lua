@@ -57,26 +57,15 @@ nvim_tree.setup {
     },
   },
   view = {
-    float = {
-      enable = true,
-      open_win_config = {
-        relative = "editor",
-        border = "rounded",
-        width = 30,
-        height = 30,
-        row = 1,
-        col = 1,
-      },
-    },
+    width = 30,
     side = "left",
     mappings = {
       list = {
-        { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
-        { key = "h", cb = tree_cb "close_node" },
-        { key = "v", cb = tree_cb "vsplit" },
+        { key = "h", cb = tree_cb("close_node") },
+        { key = "v", cb = tree_cb("vsplit") },
       },
     },
   },
 }
 
-vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "[E]xplore tree" })
+vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "nvim-tree: File [E]xplorer" })

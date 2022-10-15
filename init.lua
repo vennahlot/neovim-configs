@@ -9,7 +9,7 @@ require "user/nvim-tree"
 require "user/toggleterm"
 require "user/telescope"
 require "user/gitsigns"
-require "user/which-key"
+require "user/key-menu"
 
 
 -- [[ Highlight on yank ]]
