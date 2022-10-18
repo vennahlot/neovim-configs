@@ -15,7 +15,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
   vim.cmd "packadd packer.nvim"
 end
 
--- Automatically source and re-compile packer whenever you save this init.lua
+-- Automatically source and re-compile packer whenever you save this file.
 vim.cmd([[
   augroup packer_user_config
     autocmd!
@@ -40,22 +40,25 @@ packer.init {
 
 -- Install your plugins here.
 return packer.startup(function(use)
-
- -- My plugins here
-  use "wbthomason/packer.nvim" -- Have packer manage itself.
+  -- Core functionalities
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim.
   use "nvim-lua/plenary.nvim" -- Useful lua functions used by lots of plugins
-  use "akinsho/toggleterm.nvim" -- Terminal
-  use "linty-org/key-menu.nvim"
 
-  -- Editor layout plugins
+  -- Package managers
+  use "wbthomason/packer.nvim" -- Have packer manage itself.
+  use "williamboman/mason.nvim" -- Package manager for LSP, DAP, Linters...
+
+  -- Programming functionalities
+  use "akinsho/toggleterm.nvim" -- Terminal
+
+  -- Appearance and layout
+  use "morhetz/gruvbox" -- Color scheme
+  use "kyazdani42/nvim-web-devicons" -- Dev Icons
   use "akinsho/bufferline.nvim" -- Buffer as tabline
   use "nvim-lualine/lualine.nvim" -- Status line
-  use "kyazdani42/nvim-web-devicons" -- Dev Icons
   use "kyazdani42/nvim-tree.lua" -- File tree
+  use "linty-org/key-menu.nvim"
 
-  -- Colorschemes
-  use "morhetz/gruvbox"
 
   -- cmp plugins
   use { 'hrsh7th/nvim-cmp', requires = { 'hrsh7th/cmp-nvim-lsp' } }               -- Autocompletion
@@ -66,7 +69,7 @@ return packer.startup(function(use)
 
   -- LSP
   use "neovim/nvim-lspconfig" -- enable LSP
-  use "williamboman/nvim-lsp-installer" -- simple to use language server installer
+  use "williamboman/mason-lspconfig.nvim" -- Mason support for LSP
 
   -- Telescope
   use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } } -- Fuzzy Finder (files, lsp, etc)
@@ -74,18 +77,11 @@ return packer.startup(function(use)
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable "make" == 1 }
 
   -- Git
-  use 'tpope/vim-fugitive'                                                        -- Git commands in nvim
-  use 'tpope/vim-rhubarb'                                                         -- Fugitive-companion to interact with github
   use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }       -- Add git related info in the signs columns and popups
 
   -- Treesitter
   use 'nvim-treesitter/nvim-treesitter'                                           -- Highlight, edit, and navigate code
   use 'nvim-treesitter/nvim-treesitter-textobjects'                               -- Additional textobjects for treesitter
-
-  -- Others
-  use 'numToStr/Comment.nvim'                                                     -- "gc" to comment visual regions/lines
-  use 'lukas-reineke/indent-blankline.nvim'                                       -- Add indentation guides even on blank lines
-  use 'tpope/vim-sleuth'                                                          -- Detect tabstop and shiftwidth automatically
 
   -- Automatically set up your configuration after cloning packer.nvim.
   -- Put this at the end after all plugins

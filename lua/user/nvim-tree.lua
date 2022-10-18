@@ -68,4 +68,5 @@ nvim_tree.setup {
   },
 }
 
-vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "nvim-tree: File [E]xplorer" })
+vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>",
+               { silent = true, noremap = true, desc = "nvim-tree: File [E]xplorer" })
