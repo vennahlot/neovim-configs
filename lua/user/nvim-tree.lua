@@ -15,6 +15,9 @@ nvim_tree.setup {
     enable = true,
     update_cwd = true,
   },
+  filters = {
+    dotfiles = false,
+  },
   renderer = {
     root_folder_modifier = ":t",
     icons = {
@@ -57,6 +60,9 @@ nvim_tree.setup {
     },
   },
   view = {
+    float = {
+      enable = true,
+    },
     width = 30,
     side = "left",
     mappings = {

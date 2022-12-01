@@ -50,6 +50,7 @@ return packer.startup(function(use)
 
   -- Programming functionalities
   use "akinsho/toggleterm.nvim" -- Terminal
+  use "mfussenegger/nvim-dap"
 
   -- Appearance and layout
   use "morhetz/gruvbox" -- Color scheme
@@ -57,8 +58,7 @@ return packer.startup(function(use)
   use "akinsho/bufferline.nvim" -- Buffer as tabline
   use "nvim-lualine/lualine.nvim" -- Status line
   use "kyazdani42/nvim-tree.lua" -- File tree
-  use "linty-org/key-menu.nvim"
-
+  use "folke/which-key.nvim"
 
   -- cmp plugins
   use { 'hrsh7th/nvim-cmp', requires = { 'hrsh7th/cmp-nvim-lsp' } }               -- Autocompletion
