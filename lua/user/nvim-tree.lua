@@ -62,6 +62,11 @@ nvim_tree.setup {
   view = {
     float = {
       enable = true,
+      open_win_config = {
+        width = 100,
+        height = 30,
+        col = vim.api.nvim_win_get_width(0) / 2 - 50,
+      }
     },
     width = 30,
     side = "left",
