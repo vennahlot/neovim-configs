@@ -63,9 +63,9 @@ nvim_tree.setup {
     float = {
       enable = true,
       open_win_config = {
-        width = 100,
+        width = 50,
         height = 30,
-        col = vim.api.nvim_win_get_width(0) / 2 - 50,
+        col = vim.api.nvim_win_get_width(0) / 2 - 25,
         row = vim.api.nvim_win_get_height(0) / 2 - 15,
       }
     },
