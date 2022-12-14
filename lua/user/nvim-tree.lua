@@ -66,6 +66,7 @@ nvim_tree.setup {
         width = 100,
         height = 30,
         col = vim.api.nvim_win_get_width(0) / 2 - 50,
+        row = vim.api.nvim_win_get_height(0) / 2 - 15,
       }
     },
     width = 30,
