@@ -48,40 +48,49 @@ return packer.startup(function(use)
   use "wbthomason/packer.nvim" -- Have packer manage itself.
   use "williamboman/mason.nvim" -- Package manager for LSP, DAP, Linters...
 
-  -- Programming functionalities
-  use "akinsho/toggleterm.nvim" -- Terminal
-  use "mfussenegger/nvim-dap"
-
   -- Appearance and layout
   use "morhetz/gruvbox" -- Color scheme
   use "kyazdani42/nvim-web-devicons" -- Dev Icons
   use "akinsho/bufferline.nvim" -- Buffer as tabline
   use "nvim-lualine/lualine.nvim" -- Status line
   use "kyazdani42/nvim-tree.lua" -- File tree
-  use "folke/which-key.nvim"
+  use "folke/which-key.nvim" -- Key hints
+  use "goolord/alpha-nvim" -- Greeter
+  use "karb94/neoscroll.nvim" -- Smooth scroll
 
   -- cmp plugins
-  use { 'hrsh7th/nvim-cmp', requires = { 'hrsh7th/cmp-nvim-lsp' } }               -- Autocompletion
+  use { 'hrsh7th/nvim-cmp', requires = { 'hrsh7th/cmp-nvim-lsp' } } -- Autocompletion
   use "hrsh7th/cmp-buffer" -- buffer completions
   use "hrsh7th/cmp-path" -- path completions
   use "hrsh7th/cmp-cmdline" -- cmdline completions
-  use { 'L3MON4D3/LuaSnip', requires = { 'saadparwaiz1/cmp_luasnip' } }           -- Snippet Engine and Snippet Expansion
+  use { 'L3MON4D3/LuaSnip', requires = { 'saadparwaiz1/cmp_luasnip' } } -- Snippet Engine and Snippet Expansion
 
   -- LSP
   use "neovim/nvim-lspconfig" -- enable LSP
   use "williamboman/mason-lspconfig.nvim" -- Mason support for LSP
 
+  -- DAP
+  use "mfussenegger/nvim-dap"
+  use "mfussenegger/nvim-dap-python"
+  use "rcarriga/nvim-dap-ui"
+
+  -- Diagnostics
+  use "folke/trouble.nvim"
+
   -- Telescope
-  use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } } -- Fuzzy Finder (files, lsp, etc)
-  -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
-  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable "make" == 1 }
+  use 'nvim-telescope/telescope.nvim' -- Fuzzy Finder (files, lsp, etc)
+  use 'nvim-telescope/telescope-fzf-native.nvim'
 
   -- Git
-  use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }       -- Add git related info in the signs columns and popups
+  use 'lewis6991/gitsigns.nvim'
+  use 'sindrets/diffview.nvim'
 
   -- Treesitter
-  use 'nvim-treesitter/nvim-treesitter'                                           -- Highlight, edit, and navigate code
-  use 'nvim-treesitter/nvim-treesitter-textobjects'                               -- Additional textobjects for treesitter
+  use 'nvim-treesitter/nvim-treesitter' -- Highlight, edit, and navigate code
+  use 'nvim-treesitter/nvim-treesitter-textobjects' -- Additional textobjects for treesitter
+
+  -- Terminals
+  use "akinsho/toggleterm.nvim" -- Terminal
 
   -- Automatically set up your configuration after cloning packer.nvim.
   -- Put this at the end after all plugins
