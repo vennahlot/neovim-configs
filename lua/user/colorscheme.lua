@@ -8,3 +8,7 @@ end
 
 vim.g.gruvbox_contrast_dark = 'hard'
 
+-- vim.cmd([[
+-- highlight SignColumn        NONE
+-- highlight link SignColumn   GruvboxBg0
+-- ]])

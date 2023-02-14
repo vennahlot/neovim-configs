@@ -9,6 +9,12 @@ vim.fn.sign_define("DiagnosticSignError", { texthl = "DiagnosticSignError", text
 vim.fn.sign_define("DiagnosticSignWarn", { texthl = "DiagnosticSignWarn", text = "", numhl = "" })
 vim.fn.sign_define("DiagnosticSignHint", { texthl = "DiagnosticSignHint", text = "", numhl = "" })
 vim.fn.sign_define("DiagnosticSignInfo", { texthl = "DiagnosticSignInfo", text = "", numhl = "" })
+vim.cmd([[
+highlight DiagnosticSignError ctermfg=1 guifg=Red ctermbg=237 guibg=#3c3836
+highlight DiagnosticSignWarn ctermfg=3 guifg=Orange ctermbg=237 guibg=#3c3836
+highlight DiagnosticSignInfo ctermfg=4 guifg=LightBlue ctermbg=237 guibg=#3c3836
+highlight DiagnosticSignHint ctermfg=7 guifg=LightGrey ctermbg=237 guibg=#3c3836
+]])
 
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
@@ -38,7 +44,7 @@ local on_attach = function(_, bufnr)
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  -- nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -55,7 +61,7 @@ local on_attach = function(_, bufnr)
   -- Disable inline error messages.
   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
       vim.lsp.diagnostic.on_publish_diagnostics, {
-          virtual_text = false
+         virtual_text = false
       }
   )
 end

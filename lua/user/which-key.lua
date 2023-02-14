@@ -25,5 +25,13 @@ wk.register({
     O = { "<cmd>DapStepOut<cr>", "step [O]ut" },
     q = { "<cmd>DapTerminate<cr>", "[q]uit" },
   },
+  x = {
+    name = "+diagnostics",
+    x = { "<cmd>TroubleToggle<cr>", "toggle diagnostics" },
+    w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "[w]orkspace diagnostics" },
+    d = { "<cmd>TroubleToggle document_diagnostics<cr>", "[d]ocument diagnostics" },
+    q = { "<cmd>TroubleToggle quickfix<cr>", "[q]uickfix" },
+    l = { "<cmd>TroubleToggle loclist<cr>", "[l]ocation list" },
+  },
   e = { "<cmd>NvimTreeToggle<cr>", "open directory [t]ree"},
 }, { prefix = "<leader>" })
