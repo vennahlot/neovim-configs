@@ -33,5 +33,4 @@ wk.register({
     q = { "<cmd>TroubleToggle quickfix<cr>", "[q]uickfix" },
     l = { "<cmd>TroubleToggle loclist<cr>", "[l]ocation list" },
   },
-  e = { "<cmd>NvimTreeToggle<cr>", "open directory [t]ree"},
 }, { prefix = "<leader>" })

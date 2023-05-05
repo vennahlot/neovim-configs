@@ -53,7 +53,6 @@ return packer.startup(function(use)
   use "kyazdani42/nvim-web-devicons" -- Dev Icons
   use "akinsho/bufferline.nvim" -- Buffer as tabline
   use "nvim-lualine/lualine.nvim" -- Status line
-  use "kyazdani42/nvim-tree.lua" -- File tree
   use "folke/which-key.nvim" -- Key hints
   use "goolord/alpha-nvim" -- Greeter
   use "karb94/neoscroll.nvim" -- Smooth scroll
@@ -83,7 +82,6 @@ return packer.startup(function(use)
 
   -- Git
   use 'lewis6991/gitsigns.nvim'
-  use 'sindrets/diffview.nvim'
 
   -- Treesitter
   use 'nvim-treesitter/nvim-treesitter' -- Highlight, edit, and navigate code
