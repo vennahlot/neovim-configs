@@ -1,9 +1,4 @@
-local status_ok, wk = pcall(require, "which-key")
-if not status_ok then
-  return
-end
-
-wk.register({
+require("which-key").register({
   ["<leader>"] = { "<cmd>Telescope buffers<cr>", "find buffers" },
   f = {
     name = "+[f]ind",
