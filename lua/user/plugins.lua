@@ -46,7 +46,15 @@ return packer.startup(function(use)
 
   -- Package managers
   use "wbthomason/packer.nvim" -- Have packer manage itself.
+
+  -- Coding essentials
+  use "neovim/nvim-lspconfig" -- enable LSP
   use "williamboman/mason.nvim" -- Package manager for LSP, DAP, Linters...
+  use "williamboman/mason-lspconfig.nvim" -- Mason support for LSP
+  use "mfussenegger/nvim-dap" -- Debugger
+  use "jay-babu/mason-nvim-dap.nvim" -- Mason dap connections
+  use "rcarriga/nvim-dap-ui" -- Debugger UI
+  use "mfussenegger/nvim-dap-python" -- Debugger config for Python
 
   -- Appearance and layout
   use "morhetz/gruvbox" -- Color scheme
@@ -63,15 +71,6 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-path" -- path completions
   use "hrsh7th/cmp-cmdline" -- cmdline completions
   use { 'L3MON4D3/LuaSnip', requires = { 'saadparwaiz1/cmp_luasnip' } } -- Snippet Engine and Snippet Expansion
-
-  -- LSP
-  use "neovim/nvim-lspconfig" -- enable LSP
-  use "williamboman/mason-lspconfig.nvim" -- Mason support for LSP
-
-  -- DAP
-  use "mfussenegger/nvim-dap"
-  use "mfussenegger/nvim-dap-python"
-  use "rcarriga/nvim-dap-ui"
 
   -- Diagnostics
   use "folke/trouble.nvim"
