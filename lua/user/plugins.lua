@@ -56,6 +56,9 @@ return packer.startup(function(use)
   use "rcarriga/nvim-dap-ui" -- Debugger UI
   use "mfussenegger/nvim-dap-python" -- Debugger config for Python
 
+  -- Copilot
+  use "github/copilot.vim"
+
   -- Appearance and layout
   use "morhetz/gruvbox" -- Color scheme
   use "kyazdani42/nvim-web-devicons" -- Dev Icons
