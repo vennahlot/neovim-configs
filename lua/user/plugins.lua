@@ -1,100 +1,59 @@
-local fn = vim.fn
-
--- Automatically install packer
-local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-  PACKER_BOOTSTRAP = fn.system {
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  vim.fn.system({
     "git",
     "clone",
-    "--depth",
-    "1",
-    "https://github.com/wbthomason/packer.nvim",
-    install_path,
-  }
-  print "Installing packer close and reopen Neovim..."
-  vim.cmd "packadd packer.nvim"
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
--- Automatically source and re-compile packer whenever you save this file.
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
-]])
-
--- Use a protected call so we don't error out on first use.
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
-  return
-end
-
--- Have packer use a popup window.
-packer.init {
-  display = {
-    open_fn = function()
-      return require("packer.util").float({ border = "rounded"})
-    end,
-  },
-}
-
--- Install your plugins here.
-return packer.startup(function(use)
-  -- Core functionalities
-  use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim.
-  use "nvim-lua/plenary.nvim" -- Useful lua functions used by lots of plugins
-
-  -- Package managers
-  use "wbthomason/packer.nvim" -- Have packer manage itself.
-
+require("lazy").setup({
   -- Coding essentials
-  use "neovim/nvim-lspconfig" -- enable LSP
-  use "williamboman/mason.nvim" -- Package manager for LSP, DAP, Linters...
-  use "williamboman/mason-lspconfig.nvim" -- Mason support for LSP
-  use "mfussenegger/nvim-dap" -- Debugger
-  use "jay-babu/mason-nvim-dap.nvim" -- Mason dap connections
-  use "rcarriga/nvim-dap-ui" -- Debugger UI
-  use "mfussenegger/nvim-dap-python" -- Debugger config for Python
+  "neovim/nvim-lspconfig", -- enable LSP
+  "williamboman/mason.nvim", -- Package manager for LSP, DAP, Linters...
+  "williamboman/mason-lspconfig.nvim", -- Mason support for LSP
+  "mfussenegger/nvim-dap", -- Debugger
+  "jay-babu/mason-nvim-dap.nvim", -- Mason dap connections
+  {"rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } }, -- Debugger UI
+  "mfussenegger/nvim-dap-python", -- Debugger config for Python
 
   -- Copilot
-  use "github/copilot.vim"
+  "github/copilot.vim",
 
   -- Appearance and layout
-  use "morhetz/gruvbox" -- Color scheme
-  use "kyazdani42/nvim-web-devicons" -- Dev Icons
-  use "akinsho/bufferline.nvim" -- Buffer as tabline
-  use "nvim-lualine/lualine.nvim" -- Status line
-  use "folke/which-key.nvim" -- Key hints
-  use "goolord/alpha-nvim" -- Greeter
-  use "karb94/neoscroll.nvim" -- Smooth scroll
+  "morhetz/gruvbox", -- Color scheme
+  "kyazdani42/nvim-web-devicons", -- Dev Icons
+  "akinsho/bufferline.nvim", -- Buffer as tabline
+  "nvim-lualine/lualine.nvim", -- Status line
+  "folke/which-key.nvim", -- Key hints
+  "goolord/alpha-nvim", -- Greeter
+  "karb94/neoscroll.nvim", -- Smooth scroll
 
   -- cmp plugins
-  use { 'hrsh7th/nvim-cmp', requires = { 'hrsh7th/cmp-nvim-lsp' } } -- Autocompletion
-  use "hrsh7th/cmp-buffer" -- buffer completions
-  use "hrsh7th/cmp-path" -- path completions
-  use "hrsh7th/cmp-cmdline" -- cmdline completions
-  use { 'L3MON4D3/LuaSnip', requires = { 'saadparwaiz1/cmp_luasnip' } } -- Snippet Engine and Snippet Expansion
+  { 'hrsh7th/nvim-cmp', dependencies = { "hrsh7th/cmp-nvim-lsp" } }, -- Autocompletion
+  "hrsh7th/cmp-buffer", -- buffer completions
+  "hrsh7th/cmp-path", -- path completions
+  "hrsh7th/cmp-cmdline", -- cmdline completions
+  { "L3MON4D3/LuaSnip", dependencies = { "saadparwaiz1/cmp_luasnip" } }, -- Snippet Engine and Snippet Expansion
 
   -- Diagnostics
-  use "folke/trouble.nvim"
+  "folke/trouble.nvim",
 
   -- Telescope
-  use 'nvim-telescope/telescope.nvim' -- Fuzzy Finder (files, lsp, etc)
-  use 'nvim-telescope/telescope-fzf-native.nvim'
+  { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } }, -- Fuzzy Finder (files, lsp, etc)
+  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' },
 
   -- Git
-  use 'lewis6991/gitsigns.nvim'
+  "lewis6991/gitsigns.nvim",
 
   -- Treesitter
-  use 'nvim-treesitter/nvim-treesitter' -- Highlight, edit, and navigate code
-  use 'nvim-treesitter/nvim-treesitter-textobjects' -- Additional textobjects for treesitter
+  "nvim-treesitter/nvim-treesitter", -- Highlight, edit, and navigate code
+  "nvim-treesitter/nvim-treesitter-textobjects", -- Additional textobjects for treesitter
 
   -- Terminals
-  use "akinsho/toggleterm.nvim" -- Terminal
-
-  -- Automatically set up your configuration after cloning packer.nvim.
-  -- Put this at the end after all plugins
-  if PACKER_BOOTSTRAP then
-    require("packer").sync()
-  end
-end)
+  "akinsho/toggleterm.nvim", -- Terminal
+})
