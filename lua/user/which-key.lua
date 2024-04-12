@@ -11,14 +11,8 @@ require("which-key").register({
     d = { "<cmd>Telescope diagnostics<cr>", "[d]iagnostics"},
     c = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "[c]urrent buffer" },
   },
-  d = {
-    name = "+[d]ebug",
-    b = { "<cmd>DapToggleBreakpoint<cr>", "toggle [b]reakpoints" },
-    c = { "<cmd>DapContinue<cr>", "[c]ontinue" },
-    i = { "<cmd>DapStepInto<cr>", "step [i]nto" },
-    o = { "<cmd>DapStepOver<cr>", "step [o]ver" },
-    O = { "<cmd>DapStepOut<cr>", "step [O]ut" },
-    q = { "<cmd>DapTerminate<cr>", "[q]uit" },
+  b = {
+    "<cmd>DapToggleBreakpoint<cr>", "toggle [b]reakpoint"
   },
   x = {
     name = "+diagnostics",
