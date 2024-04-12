@@ -31,7 +31,6 @@ require("lazy").setup({
   "nvim-lualine/lualine.nvim", -- Status line
   "folke/which-key.nvim", -- Key hints
   "goolord/alpha-nvim", -- Greeter
-  "karb94/neoscroll.nvim", -- Smooth scroll
 
   -- cmp plugins
   { 'hrsh7th/nvim-cmp', dependencies = { "hrsh7th/cmp-nvim-lsp" } }, -- Autocompletion
