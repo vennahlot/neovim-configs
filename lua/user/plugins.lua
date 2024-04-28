@@ -18,7 +18,7 @@ require("lazy").setup({
   "williamboman/mason-lspconfig.nvim", -- Mason support for LSP
   "mfussenegger/nvim-dap", -- Debugger
   "jay-babu/mason-nvim-dap.nvim", -- Mason dap connections
-  {"rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } }, -- Debugger UI
+  { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } }, -- Debugger UI
   "mfussenegger/nvim-dap-python", -- Debugger config for Python
 
   -- Copilot
