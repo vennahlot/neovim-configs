@@ -1,11 +1,20 @@
-local status_ok, lualine = pcall(require, "lualine")
-if not status_ok then
-  return
-end
+lualine = require("lualine")
 
 local hide_in_width = function()
   return vim.fn.winwidth(0) > 80
 end
+
+local filetype = {
+  "filetype",
+  colored = true,   -- Displays filetype icon in color if set to true
+  icon_only = true, -- Display only an icon for filetype
+}
+
+local filename = {
+  "filename",
+  path = 1,  -- 0 = just filename, 1 = relative path, 2 = absolute path
+  file_status = true,  -- displays file status (readonly status, modified status)
+}
 
 local diff = {
   "diff",
@@ -17,19 +26,24 @@ local diff = {
 local diagnostics = {
   "diagnostics",
   sources = { "nvim_diagnostic" },
-  sections = { "error", "warn" },
-  symbols = { error = " ", warn = " " },
-  colored = false,
+  sections = { "error", "warn", "info" },
+  symbols = { error = " ", warn = " ", info = " "},
+  colored = true,
   update_in_insert = false,
   always_visible = true,
+}
+
+local copilot = {
+  function() return require("copilot_status").status_string() end,
+  cnd = function() return require("copilot_status").enabled() end,
 }
 
 lualine.setup {
   options = {
     icons_enabled = true,
-    theme = 'auto',
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
+    theme = "auto",
+    component_separators = { left = "", right = ""},
+    section_separators = { left = "", right = ""},
     disabled_filetypes = {
       statusline = {},
       winbar = {},
@@ -44,26 +58,18 @@ lualine.setup {
     }
   },
   sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', diff, diagnostics},
-    lualine_c = {{
-      'filename',
-      path = 1,  -- 0 = just filename, 1 = relative path, 2 = absolute path
-      file_status = true,  -- displays file status (readonly status, modified status)
-    }},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
+    lualine_a = {"mode"},
+    lualine_b = {filename, filetype},
+    lualine_c = {"encoding", "branch", diff},
+    lualine_x = {copilot, diagnostics},
+    lualine_y = {},
+    lualine_z = {"progress"}
   },
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {{
-      'filename',
-      path = 2,  -- 0 = just filename, 1 = relative path, 2 = absolute path
-      file_status = true,  -- displays file status (readonly status, modified status)
-    }},
-    lualine_x = {'location'},
+    lualine_c = {filename, filetype},
+    lualine_x = {"progress"},
     lualine_y = {},
     lualine_z = {}
   },

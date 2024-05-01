@@ -1,13 +1,7 @@
 -- nvim-cmp setup
-local cmp_status_ok, cmp = pcall(require, "cmp")
-if not cmp_status_ok then
-  return
-end
-
-local snip_status_ok, luasnip = pcall(require, "luasnip")
-if not snip_status_ok then
-  return
-end
+local cmp = require("cmp")
+local luasnip = require("luasnip")
+local lspkind = require("lspkind")
 
 require("luasnip/loaders/from_vscode").lazy_load()
 
@@ -49,14 +43,23 @@ cmp.setup {
     --   end
     -- end, { 'i', 's' }),
   },
+  formatting = {
+    format = lspkind.cmp_format({
+      mode = 'symbol',
+      maxwidth = 50,
+      ellipsis_char = '...',
+      show_labelDetails = true,
+      symbol_map = { Copilot = "" },
+    })
+  },
   sources = {
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' },
+    -- Copilot Source
+    { name = "copilot", group_index = 2 },
+    { name = "nvim_lsp", group_index = 2 },
+    { name = "path", group_index = 2 },
+    { name = "luasnip", group_index = 2 },
   },
 }
-
-
-
 
 -- -- Setup nvim-cmp.
 -- cmp.setup({

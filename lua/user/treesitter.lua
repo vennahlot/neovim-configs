@@ -5,7 +5,7 @@ end
 
 configs.setup({
 	ensure_installed = {
-    "lua", "vim",
+    "lua", "vim", "vimdoc",
     "bash", "c", "javascript", "json", "python", "java",
     "typescript", "tsx", "css", "rust", "java", "yaml",
     "markdown", "markdown_inline"

@@ -21,13 +21,17 @@ require("lazy").setup({
   { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } }, -- Debugger UI
   "mfussenegger/nvim-dap-python", -- Debugger config for Python
 
+  -- Linters
+  "https://gitlab.com/schrieveslaach/sonarlint.nvim.git",
+
   -- Copilot
-  "github/copilot.vim",
+  "zbirenbaum/copilot.lua",
+  "zbirenbaum/copilot-cmp",
+  "jonahgoldwastaken/copilot-status.nvim",
 
   -- Appearance and layout
-  "morhetz/gruvbox", -- Color scheme
-  "kyazdani42/nvim-web-devicons", -- Dev Icons
-  "akinsho/bufferline.nvim", -- Buffer as tabline
+  "ellisonleao/gruvbox.nvim", -- Color scheme
+  "nvim-tree/nvim-web-devicons", -- Dev Icons
   "nvim-lualine/lualine.nvim", -- Status line
   "folke/which-key.nvim", -- Key hints
   "goolord/alpha-nvim", -- Greeter
@@ -38,9 +42,7 @@ require("lazy").setup({
   "hrsh7th/cmp-path", -- path completions
   "hrsh7th/cmp-cmdline", -- cmdline completions
   { "L3MON4D3/LuaSnip", dependencies = { "saadparwaiz1/cmp_luasnip" } }, -- Snippet Engine and Snippet Expansion
-
-  -- Diagnostics
-  "folke/trouble.nvim",
+  "onsails/lspkind.nvim", -- Icons for LSP
 
   -- Telescope
   { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } }, -- Fuzzy Finder (files, lsp, etc)
