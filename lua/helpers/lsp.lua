@@ -1,15 +1,3 @@
--- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
--- vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
--- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
-
--- Diagnostic signs
-vim.fn.sign_define("DiagnosticSignError", { texthl = "DiagnosticSignError", text = "", numhl = "" })
-vim.fn.sign_define("DiagnosticSignWarn", { texthl = "DiagnosticSignWarn", text = "", numhl = "" })
-vim.fn.sign_define("DiagnosticSignHint", { texthl = "DiagnosticSignHint", text = "", numhl = "" })
-vim.fn.sign_define("DiagnosticSignInfo", { texthl = "DiagnosticSignInfo", text = "", numhl = "" })
-
 -- LSP settings.
 local on_attach = function(_, bufnr)
   local nmap = function(keys, func, desc)
@@ -25,12 +13,12 @@ local on_attach = function(_, bufnr)
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
   nmap('gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
   nmap('gr', require('telescope.builtin').lsp_references)
-  -- nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  -- nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -52,20 +40,33 @@ local on_attach = function(_, bufnr)
   )
 end
 
--- nvim-cmp supports additional completion capabilities
-local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-
--- Enable the following language servers
-local servers = { 'pyright', 'jdtls', 'tsserver' }
-
--- Ensure the servers above are installed
-require('mason-lspconfig').setup {
-  ensure_installed = servers,
-}
-
-for _, lsp in ipairs(servers) do
-  require('lspconfig')[lsp].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-  }
+local setup_keymaps = function()
+  -- Diagnostic keymaps
+  vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+  vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+  vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
+  vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+  -- Diagnostic signs
+  vim.fn.sign_define("DiagnosticSignError", { texthl = "DiagnosticSignError", text = "", numhl = "" })
+  vim.fn.sign_define("DiagnosticSignWarn", { texthl = "DiagnosticSignWarn", text = "", numhl = "" })
+  vim.fn.sign_define("DiagnosticSignHint", { texthl = "DiagnosticSignHint", text = "", numhl = "" })
+  vim.fn.sign_define("DiagnosticSignInfo", { texthl = "DiagnosticSignInfo", text = "", numhl = "" })
 end
+
+return {
+  config_lsp = function ()
+    -- nvim-cmp supports additional completion capabilities
+    local capabilities = require('cmp_nvim_lsp').default_capabilities(
+      vim.lsp.protocol.make_client_capabilities()
+    )
+    -- Enable the following language servers
+    local language_servers_to_install = require('constants').language_servers_to_install
+    for _, lsp in ipairs(language_servers_to_install) do
+      require('lspconfig')[lsp].setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      }
+    end
+    setup_keymaps()
+  end
+}

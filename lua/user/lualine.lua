@@ -33,11 +33,6 @@ local diagnostics = {
   always_visible = true,
 }
 
-local copilot = {
-  function() return require("copilot_status").status_string() end,
-  cnd = function() return require("copilot_status").enabled() end,
-}
-
 lualine.setup {
   options = {
     icons_enabled = true,
@@ -61,7 +56,7 @@ lualine.setup {
     lualine_a = {"mode"},
     lualine_b = {filename, filetype},
     lualine_c = {"encoding", "branch", diff},
-    lualine_x = {copilot, diagnostics},
+    lualine_x = {"copilot", diagnostics},
     lualine_y = {},
     lualine_z = {"progress"}
   },
